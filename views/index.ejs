@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+    <title>Cocktail Recipe</title>
+</head>
+<body>
+    <h1>Random Cocktail Recipe</h1>
+    <form action="/" method="get">
+      <input type="submit" value="Get Another Random Cocktail">
+    </form>
+    <% if (typeof cocktailData !== 'undefined') { %>
+      <h2><%= cocktailData.strDrink %></h2>
+      <img src="<%= cocktailData.strDrinkThumb %>" alt="<%= cocktailData.strDrink %>">
+      <h3>Instructions:</h3>
+      <p><%= cocktailData.strInstructions %></p>
+      <h3>Ingredients:</h3>
+      <ul>
+        <% for (let i = 1; i <= 15; i++) { %>
+          <% const ingredient = cocktailData[`strIngredient${i}`]; %>
+          <% const measure = cocktailData[`strMeasure${i}`]; %>
+          <% if (ingredient && ingredient.trim() !== '' && measure && measure.trim() !== '') { %>
+            <li><%= measure %> <%= ingredient %></li>
+          <% } %>
+        <% } %>
+      </ul>
+    <% } %>
+    <% if (typeof error !== 'undefined') { %>
+      <p><strong>Error:</strong> <%= error %></p>
+    <% } %>
+</body>
+</html>
